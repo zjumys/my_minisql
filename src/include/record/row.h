@@ -108,6 +108,8 @@ class Row {
   inline size_t GetFieldCount() const { return fields_.size(); }
 
  private:
+  void Write_To_Bitmap(uint32_t &bitmap, uint32_t id) const;
+  bool Read_From_Bitmap(uint32_t bitmap, uint32_t id) const;
   RowId rid_{};
   std::vector<Field *> fields_; /** Make sure that all field ptr are destructed*/
 };

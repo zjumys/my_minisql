@@ -10,7 +10,8 @@ template <size_t PageSize>
 class BitmapPage {
  public:
   /**
-   * @return The number of pages that the bitmap page can record, i.e. the capacity of an extent.
+   * @return The number of pages that the bitmap page can record, 
+   * i.e. the capacity of an extent.
    */
   static constexpr size_t GetMaxSupportedSize() { return 8 * MAX_CHARS; }
 

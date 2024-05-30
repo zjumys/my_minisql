@@ -51,7 +51,33 @@ void DiskManager::WritePage(page_id_t logical_page_id, const char *page_data) {
  * TODO: Student Implement
  */
 page_id_t DiskManager::AllocatePage() {
-  ASSERT(false, "Not implemented yet.");
+  size_t bitmap_size_ = DiskManager::BITMAP_SIZE;
+  DiskFileMetaPage *meta_page_ = reinterpret_cast<DiskFileMetaPage *>(meta_data_);
+  uint32_t extent_id;
+  uint32_t extent_size = meta_page_->GetExtentNums();
+  for (extent_id = 0; extent_id < extent_size; ++extent_id)
+    if (meta_page_->extent_used_page_[extent_id] < bitmap_size_) break;
+  if (extent_id == extent_size) {    // All extents are full. Need to add new extent
+    if (extent_id == PAGE_SIZE - 8)  // Disk is full
+      return INVALID_PAGE_ID;
+    meta_page_->extent_used_page_[(meta_page_->num_extents_)++] = 0;
+  }
+  char buffer[PAGE_SIZE];
+  memset(buffer, 0, PAGE_SIZE);
+  ReadPhysicalPage(extent_id * (bitmap_size_ + 1) + 1, buffer);
+  BitmapPage<PAGE_SIZE> *bitmap = reinterpret_cast<BitmapPage<PAGE_SIZE> *>(buffer);
+  size_t page_size_ = bitmap->GetMaxSupportedSize();
+  uint32_t page_id;
+  for (page_id = 0; page_id < page_size_; ++page_id) {
+    if (bitmap->IsPageFree(page_id)) {
+      bitmap->AllocatePage(page_id);
+      ++(meta_page_->num_allocated_pages_);
+      WritePhysicalPage(extent_id * (bitmap_size_ + 1) + 1, buffer);
+      ++(meta_page_->extent_used_page_[extent_id]);
+      // return meta_page_->num_allocated_pages_ - 1;
+      return extent_id * bitmap_size_ + page_id;
+    }
+  }
   return INVALID_PAGE_ID;
 }
 
@@ -59,21 +85,40 @@ page_id_t DiskManager::AllocatePage() {
  * TODO: Student Implement
  */
 void DiskManager::DeAllocatePage(page_id_t logical_page_id) {
-  ASSERT(false, "Not implemented yet.");
+  size_t bitmap_size_ = DiskManager::BITMAP_SIZE;
+  uint32_t extent_id = logical_page_id / bitmap_size_;
+  uint32_t page_id = logical_page_id % bitmap_size_;
+  DiskFileMetaPage *meta_page_ = reinterpret_cast<DiskFileMetaPage *>(meta_data_);
+  char buffer[PAGE_SIZE];
+  memset(buffer, 0, PAGE_SIZE);
+  ReadPhysicalPage(extent_id * (bitmap_size_ + 1) + 1, buffer);
+  BitmapPage<PAGE_SIZE> *bitmap = reinterpret_cast<BitmapPage<PAGE_SIZE> *>(buffer);
+  if (IsPageFree(logical_page_id) == true) return;
+  bitmap->DeAllocatePage(page_id);
+  --meta_page_->extent_used_page_[extent_id];
+  --meta_page_->num_allocated_pages_;
 }
 
 /**
  * TODO: Student Implement
  */
 bool DiskManager::IsPageFree(page_id_t logical_page_id) {
-  return false;
+  size_t bitmap_size_ = DiskManager::BITMAP_SIZE;
+  uint32_t extent_id = logical_page_id / bitmap_size_;
+  page_id_t page_id = logical_page_id % bitmap_size_;
+  char buffer[PAGE_SIZE];
+  memset(buffer, 0, PAGE_SIZE);
+  ReadPhysicalPage(extent_id * (bitmap_size_ + 1) + 1, buffer);
+  BitmapPage<PAGE_SIZE> *bitmap = reinterpret_cast<BitmapPage<PAGE_SIZE> *>(buffer);
+  return bitmap->IsPageFree(page_id);
 }
 
 /**
  * TODO: Student Implement
  */
 page_id_t DiskManager::MapPageId(page_id_t logical_page_id) {
-  return 0;
+  page_id_t physical_page_id = (logical_page_id) / BITMAP_SIZE + logical_page_id + 2;
+  return physical_page_id;
 }
 
 int DiskManager::GetFileSize(const std::string &file_name) {

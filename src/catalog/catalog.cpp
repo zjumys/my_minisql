@@ -67,7 +67,7 @@ CatalogMeta::CatalogMeta() {}
 CatalogManager::CatalogManager(BufferPoolManager *buffer_pool_manager, LockManager *lock_manager,
                                LogManager *log_manager, bool init)
     : buffer_pool_manager_(buffer_pool_manager), lock_manager_(lock_manager), log_manager_(log_manager) {
-//    ASSERT(false, "Not Implemented yet");
+  //    ASSERT(false, "Not Implemented yet");
 }
 
 CatalogManager::~CatalogManager() {
@@ -85,7 +85,7 @@ CatalogManager::~CatalogManager() {
  * TODO: Student Implement
  */
 dberr_t CatalogManager::CreateTable(const string &table_name, TableSchema *schema, Txn *txn, TableInfo *&table_info) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -93,7 +93,7 @@ dberr_t CatalogManager::CreateTable(const string &table_name, TableSchema *schem
  * TODO: Student Implement
  */
 dberr_t CatalogManager::GetTable(const string &table_name, TableInfo *&table_info) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -101,7 +101,7 @@ dberr_t CatalogManager::GetTable(const string &table_name, TableInfo *&table_inf
  * TODO: Student Implement
  */
 dberr_t CatalogManager::GetTables(vector<TableInfo *> &tables) const {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -111,7 +111,7 @@ dberr_t CatalogManager::GetTables(vector<TableInfo *> &tables) const {
 dberr_t CatalogManager::CreateIndex(const std::string &table_name, const string &index_name,
                                     const std::vector<std::string> &index_keys, Txn *txn, IndexInfo *&index_info,
                                     const string &index_type) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -120,7 +120,7 @@ dberr_t CatalogManager::CreateIndex(const std::string &table_name, const string 
  */
 dberr_t CatalogManager::GetIndex(const std::string &table_name, const std::string &index_name,
                                  IndexInfo *&index_info) const {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -128,7 +128,7 @@ dberr_t CatalogManager::GetIndex(const std::string &table_name, const std::strin
  * TODO: Student Implement
  */
 dberr_t CatalogManager::GetTableIndexes(const std::string &table_name, std::vector<IndexInfo *> &indexes) const {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -136,7 +136,7 @@ dberr_t CatalogManager::GetTableIndexes(const std::string &table_name, std::vect
  * TODO: Student Implement
  */
 dberr_t CatalogManager::DropTable(const string &table_name) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -144,7 +144,7 @@ dberr_t CatalogManager::DropTable(const string &table_name) {
  * TODO: Student Implement
  */
 dberr_t CatalogManager::DropIndex(const string &table_name, const string &index_name) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -152,7 +152,7 @@ dberr_t CatalogManager::DropIndex(const string &table_name, const string &index_
  * TODO: Student Implement
  */
 dberr_t CatalogManager::FlushCatalogMetaPage() const {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -160,7 +160,7 @@ dberr_t CatalogManager::FlushCatalogMetaPage() const {
  * TODO: Student Implement
  */
 dberr_t CatalogManager::LoadTable(const table_id_t table_id, const page_id_t page_id) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -168,7 +168,7 @@ dberr_t CatalogManager::LoadTable(const table_id_t table_id, const page_id_t pag
  * TODO: Student Implement
  */
 dberr_t CatalogManager::LoadIndex(const index_id_t index_id, const page_id_t page_id) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }
 
@@ -176,6 +176,6 @@ dberr_t CatalogManager::LoadIndex(const index_id_t index_id, const page_id_t pag
  * TODO: Student Implement
  */
 dberr_t CatalogManager::GetTable(const table_id_t table_id, TableInfo *&table_info) {
-  // ASSERT(false, "Not Implemented yet");
+  ASSERT(false, "Not Implemented yet");
   return DB_FAILED;
 }

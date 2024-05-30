@@ -11,22 +11,15 @@ IndexIterator::IndexIterator(page_id_t page_id, BufferPoolManager *bpm, int inde
 }
 
 IndexIterator::~IndexIterator() {
-  if (current_page_id != INVALID_PAGE_ID)
-    buffer_pool_manager->UnpinPage(current_page_id, false);
+  if (current_page_id != INVALID_PAGE_ID) buffer_pool_manager->UnpinPage(current_page_id, false);
 }
 
-std::pair<GenericKey *, RowId> IndexIterator::operator*() {
-  ASSERT(false, "Not implemented yet.");
-}
+std::pair<GenericKey *, RowId> IndexIterator::operator*() { ASSERT(false, "Not implemented yet."); }
 
-IndexIterator &IndexIterator::operator++() {
-  ASSERT(false, "Not implemented yet.");
-}
+IndexIterator &IndexIterator::operator++() { ASSERT(false, "Not implemented yet."); }
 
 bool IndexIterator::operator==(const IndexIterator &itr) const {
   return current_page_id == itr.current_page_id && item_index == itr.item_index;
 }
 
-bool IndexIterator::operator!=(const IndexIterator &itr) const {
-  return !(*this == itr);
-}
+bool IndexIterator::operator!=(const IndexIterator &itr) const { return !(*this == itr); }

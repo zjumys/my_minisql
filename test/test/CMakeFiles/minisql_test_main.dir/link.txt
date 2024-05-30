@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC   -std=gnu++11 -fPIC -Wall -Wextra -Wattributes -Wunused-parameter -shared -Wl,-soname,libminisql_test_main.so -o libminisql_test_main.so CMakeFiles/minisql_test_main.dir/main_test.cpp.o  -Wl,-rpath,/root/Database/lab6/minisql/test/glog-build:/root/Database/lab6/minisql/test/lib ../glog-build/libglog.so.0.6.0 ../lib/libgtest.so.1.11.0 -lpthread 

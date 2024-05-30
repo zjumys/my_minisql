@@ -62,6 +62,16 @@ TEST(BufferPoolManagerTest, BinaryDataTest) {
   }
   // Scenario: We should be able to fetch the data we wrote a while ago.
   page0 = bpm->FetchPage(0);
+  // for (int i = 0; i < 4096; ++i) {
+  //   // 输出每个字节的十六进制表示
+  //   std::cout << std::hex << std::setw(2) << std::setfill('0') << (static_cast<int>(page0->GetData()[i]) & 0xff) << "
+  //   ";
+
+  //   // 可选：每16个字节换行一次
+  //   if ((i + 1) % 16 == 0) {
+  //     std::cout << std::endl;
+  //   }
+  // }
   EXPECT_EQ(0, memcmp(page0->GetData(), random_binary_data, PAGE_SIZE));
   EXPECT_EQ(true, bpm->UnpinPage(0, true));
 
