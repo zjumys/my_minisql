@@ -49,8 +49,8 @@ class TablePage : public Page {
 
   bool MarkDelete(const RowId &rid, Txn *txn, LockManager *lock_manager, LogManager *log_manager);
 
-  bool UpdateTuple(Row &new_row, Row *old_row, Schema *schema, Txn *txn, LockManager *lock_manager,
-                   LogManager *log_manager);
+  int UpdateTuple(Row &new_row, Row *old_row, Schema *schema, Txn *txn, LockManager *lock_manager,
+                  LogManager *log_manager);
 
   void ApplyDelete(const RowId &rid, Txn *txn, LogManager *log_manager);
 

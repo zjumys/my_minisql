@@ -69,12 +69,14 @@ page_id_t DiskManager::AllocatePage() {
   size_t page_size_ = bitmap->GetMaxSupportedSize();
   uint32_t page_id;
   for (page_id = 0; page_id < page_size_; ++page_id) {
+    // std::cout << "disk" << ' ' << page_id << std::endl;
     if (bitmap->IsPageFree(page_id)) {
       bitmap->AllocatePage(page_id);
       ++(meta_page_->num_allocated_pages_);
       WritePhysicalPage(extent_id * (bitmap_size_ + 1) + 1, buffer);
       ++(meta_page_->extent_used_page_[extent_id]);
       // return meta_page_->num_allocated_pages_ - 1;
+      // std::cout << "Disk" << " " << extent_id << ' ' << bitmap_size_ << ' ' << page_id << std::endl;
       return extent_id * bitmap_size_ + page_id;
     }
   }

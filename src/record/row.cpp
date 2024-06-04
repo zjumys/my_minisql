@@ -26,7 +26,6 @@ uint32_t Row::SerializeTo(char *buf, Schema *schema) const {
   }
   char *buf_tmp = buf;
   uint32_t total_size = 0;
-  std::cout << total_size << std::endl;
   // field nums
   uint32_t field_num = this->fields_.size();
   MACH_WRITE_UINT32(buf_tmp, field_num);

@@ -113,7 +113,12 @@ class TableHeap {
         schema_(schema),
         log_manager_(log_manager),
         lock_manager_(lock_manager) {
-    ASSERT(false, "Not implemented yet.");
+    page_id_t page_id;
+    auto first_page = reinterpret_cast<TablePage *>(buffer_pool_manager->NewPage(page_id));
+    first_page->Init(page_id, INVALID_PAGE_ID, log_manager_, txn);
+    buffer_pool_manager->UnpinPage(page_id, false);
+    this->first_page_id_ = page_id;
+    // std::cout << first_page->GetPageId() << " " << page_id << std::endl;
   };
 
   explicit TableHeap(BufferPoolManager *buffer_pool_manager, page_id_t first_page_id, Schema *schema,
