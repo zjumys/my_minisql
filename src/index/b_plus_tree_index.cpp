@@ -69,7 +69,7 @@ dberr_t BPlusTreeIndex::ScanKey(const Row &key, vector<RowId> &result, Txn *txn,
     }
     vector<RowId> temp;
     if (container_.GetValue(index_key, temp, txn))
-      result.erase(find(result.begin(), result.end(), temp[0]));
+      result.erase(find(result.begin(), result.end(), temp[0]));//
   }
   delete index_key;
   if (!result.empty())

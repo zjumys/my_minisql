@@ -62,6 +62,8 @@ class BPlusTreeLeafPage : public BPlusTreePage {
 
   bool Lookup(const GenericKey *key, RowId &value, const KeyManager &comparator);
 
+  void Remove(int index);
+
   int RemoveAndDeleteRecord(const GenericKey *key, const KeyManager &comparator);
 
   // Split and Merge utility methods

@@ -10,7 +10,7 @@
 #include "page/b_plus_tree_internal_page.h"
 #include "page/b_plus_tree_leaf_page.h"
 #include "page/b_plus_tree_page.h"
-
+#include "index/index_iterator.h"
 /**
  * Main class providing the API for the Interactive B+ Tree.
  *
